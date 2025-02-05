@@ -6,12 +6,8 @@ from reportlab.lib.pagesizes import letter
 import io
 import base64
 
-# Set up your Vertex AI API key (get it from Streamlit secrets or environment variables)
 API_KEY = st.secrets["gemini_api_key"]  # Best practice: store API keys securely
-#openai_api_key
 genai.configure(api_key=API_KEY)
-
-
 
 def generate_text(outline, content):
     """Generates text using Gemini."""
@@ -55,7 +51,51 @@ def create_download_link(buffer, filename):
 
 st.title("Gemini PDF Generator")
 
-outline_input = st.text_area("Outline", height=200)
+
+
+default_lab_manual_outline="""
+Here is a suggested outline for a lab manual for a specific class:
+Lab Title
+[Insert lab title, e.g., "Lab 3: Vulnerability Scanning and Management"]
+Introduction
+Briefly introduce the lab, including:
+Learning objectives
+Overview of the lab exercise
+Importance of the lab topic
+Prerequisites
+List any prerequisites for the lab, including:
+Required reading or assignments
+Prior knowledge or skills
+Software or hardware requirements
+Procedures
+Step-by-step instructions for completing the lab exercise, including:
+Setup and configuration
+Execution of the lab exercise
+Troubleshooting tips
+Results
+Instructions for recording and analyzing results, including:
+Data collection and measurement
+Data analysis and interpretation
+Expected outcomes and results
+Summary
+Brief summary of the lab exercise, including:
+Key findings and takeaways
+Implications and applications
+Review questions or discussion topics
+Additional Resources
+Optional section for providing additional resources, including:
+References and citations
+Online resources and tutorials
+Software or hardware documentation
+Grading Criteria
+Optional section for outlining grading criteria, including:
+Lab report requirements
+Evaluation criteria
+Point values or weights
+
+"""
+
+outline_input = st.text_area("Outline", value=default_lab_manual_outline, height=200)
 content_input = st.text_area("Content", height=200)
 
 if st.button("Generate PDF"):
