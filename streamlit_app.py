@@ -95,7 +95,7 @@ Point values or weights
 
 """
 
-deafult_lab_content = """
+default_lab_content = """
 I'll provide a basic example of a buffer overflow vulnerability using C and the GCC compiler on a Linux system. Please note that intentionally exploiting vulnerabilities is not recommended and should only be done in a controlled environment.
 Vulnerable Code
 Create a file called vulnerable.c with the following code:
