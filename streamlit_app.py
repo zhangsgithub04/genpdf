@@ -145,8 +145,14 @@ if st.button("Generate PDF"):
     if outline_input and content_input:
         generated_text = generate_text(outline_input, content_input)
         if generated_text:
+            # Display the generated text on the GUI for debugging
+            st.write("## Generated Text (For Debugging):")  # Markdown heading
+            st.write(generated_text)  # Display the text
+
             pdf_buffer = generate_pdf(generated_text)
-            html = create_download_link(pdf_buffer, "generated_document.pdf")
-            st.markdown(html, unsafe_allow_html=True)
+            # ... (download link creation as before)
+        else:
+            st.error("Failed to generate text. Check the Gemini API.")  # More specific error message
     else:
         st.warning("Please enter both outline and content.")
+        
