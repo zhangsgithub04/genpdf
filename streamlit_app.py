@@ -12,7 +12,7 @@ genai.configure(api_key=API_KEY)
 def generate_text(outline, content):
     """Generates text using Gemini."""
     prompt = f"""
-    Generate a well-structured document based on the following outline and content:
+    Generate a well-structured document based on the following outline and content, using proper necessary formattings and multiple pages as needed, to feed into reportlab.
 
     Outline:
     {outline}
