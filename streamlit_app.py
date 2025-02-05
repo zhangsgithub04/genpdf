@@ -44,10 +44,27 @@ def generate_pdf(generated_text):
     buffer.seek(0)  # Reset buffer position
     return buffer
 
-def create_download_link(buffer, filename):
-    """Creates a download link for the PDF."""
+"""Creates a download link for the PDF."""
+"""
+def create_download_link(buffer, filename, type):
     b64 = base64.b64encode(buffer.getvalue()).decode()
     return f'<a href="data:application/pdf;base64,{b64}" download="{filename}">Download PDF</a>'
+"""
+def create_download_link(buffer, filename, file_type):
+    """Creates a download link for the file."""
+    mime_types = {
+        "pdf": "application/pdf",
+        "tex": "application/x-latex",
+        "txt": "text/plain",
+        "csv": "text/csv",
+        "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    }
+    mime_type = mime_types.get(file_type, "application/octet-stream")  # Default if type is unknown.
+
+    b64 = base64.b64encode(buffer.getvalue()).decode()
+    href = f'<a href="data:{mime_type};base64,{b64}" download="{filename}">Download {file_type.upper()}</a>'
+    return href
+    
 
 st.title("Gemini PDF Generator")
 
@@ -151,9 +168,9 @@ if st.button("Generate PDF"):
 
             pdf_buffer = generate_pdf(generated_text)
             # ... (download link creation as before)
-            html1 = create_download_link(pdf_buffer, "generated_document.pdf")
+            html1 = create_download_link(pdf_buffer, "generated_lab_manual.pdf", "pdf")
             st.markdown(html1, unsafe_allow_html=True)
-            html2 = create_download_link(pdf_buffer, "generated_document.tex")
+            html2 = create_download_link(pdf_buffer, "generated_lab_manual.tex", "tex")
             st.markdown(html2, unsafe_allow_html=True)
         else:
             st.error("Failed to generate text. Check the Gemini API.")  # More specific error message
