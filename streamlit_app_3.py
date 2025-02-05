@@ -1,5 +1,5 @@
 import streamlit as st
-from fpdf import FPDF  # Or fpdf, but fpdf2 is preferred
+from fpdf import FPDF  # Or fpdf, but fpdf2 is preferred   pdf need 
 import base64
 import io
 
