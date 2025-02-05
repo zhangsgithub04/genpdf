@@ -151,6 +151,10 @@ if st.button("Generate PDF"):
 
             pdf_buffer = generate_pdf(generated_text)
             # ... (download link creation as before)
+            html1 = create_download_link(pdf_buffer, "generated_document.pdf")
+            st.markdown(html1, unsafe_allow_html=True)
+            html2 = create_download_link(pdf_buffer, "generated_document.tex")
+            st.markdown(html2, unsafe_allow_html=True)
         else:
             st.error("Failed to generate text. Check the Gemini API.")  # More specific error message
     else:
