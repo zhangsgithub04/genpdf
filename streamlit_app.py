@@ -7,9 +7,11 @@ import io
 import base64
 
 # Set up your Vertex AI API key (get it from Streamlit secrets or environment variables)
-API_KEY = st.secrets["openai_api_key"]  # Best practice: store API keys securely
+API_KEY = st.secrets["gemini_api_key"]  # Best practice: store API keys securely
 #openai_api_key
 genai.configure(api_key=API_KEY)
+
+
 
 def generate_text(outline, content):
     """Generates text using Gemini."""
