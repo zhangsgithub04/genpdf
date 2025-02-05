@@ -66,7 +66,7 @@ def create_download_link(buffer, filename, file_type):
     return href
     
 
-st.title("Gemini PDF Generator")
+st.title("Gemini Lab Manual Generator")
 
 
 
@@ -158,7 +158,7 @@ Please note that this is a simplified example and real-world buffer overflow vul
 outline_input = st.text_area("Outline", value=default_lab_manual_outline, height=200)
 content_input = st.text_area("Content", value=default_lab_content, height=200)
 
-if st.button("Generate PDF"):
+if st.button("Generate Lab Manual"):
     if outline_input and content_input:
         generated_text = generate_text(outline_input, content_input)
         if generated_text:
