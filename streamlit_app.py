@@ -44,12 +44,6 @@ def generate_pdf(generated_text):
     buffer.seek(0)  # Reset buffer position
     return buffer
 
-"""Creates a download link for the PDF."""
-"""
-def create_download_link(buffer, filename, type):
-    b64 = base64.b64encode(buffer.getvalue()).decode()
-    return f'<a href="data:application/pdf;base64,{b64}" download="{filename}">Download PDF</a>'
-"""
 def create_download_link(buffer, filename, file_type):
     """Creates a download link for the file."""
     mime_types = {
