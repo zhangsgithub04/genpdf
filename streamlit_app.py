@@ -95,8 +95,51 @@ Point values or weights
 
 """
 
+deafult_lab_content = """
+I'll provide a basic example of a buffer overflow vulnerability using C and the GCC compiler on a Linux system. Please note that intentionally exploiting vulnerabilities is not recommended and should only be done in a controlled environment.
+Vulnerable Code
+Create a file called vulnerable.c with the following code:
+C
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char *input) {
+    char buffer[10];
+    strcpy(buffer, input);
+    printf("You entered: %s\n", buffer);
+}
+
+int main() {
+    char input[100];
+    printf("Enter your input: ");
+    fgets(input, sizeof(input), stdin);
+    vulnerable_function(input);
+    return 0;
+}
+Compile the Vulnerable Code
+Compile the code using the GCC compiler:
+Bash
+gcc -g -fno-stack-protector vulnerable.c -o vulnerable
+Reproduce the Buffer Overflow
+Use a tool like gdb or a Python script to send a large input to the vulnerable program:
+Using GDB:
+Bash
+gdb ./vulnerable
+(gdb) run
+Enter your input: $(python -c 'print("A"*20)')
+Using a Python Script:
+Bash
+python -c 'print("A"*100)' | ./vulnerable
+Analyze the Crash
+After running the vulnerable program with a large input, it should crash. You can analyze the crash using gdb:
+Bash
+gdb ./vulnerable core
+(gdb) bt
+This will display the backtrace of the crash, showing the overflowed buffer.
+Please note that this is a simplified example and real-world buffer overflow vulnerabilities can be much more complex. Additionally, it's essential to follow proper security practices and guidelines when working with vulnerable code.
+"""
 outline_input = st.text_area("Outline", value=default_lab_manual_outline, height=200)
-content_input = st.text_area("Content", height=200)
+content_input = st.text_area("Content", value=default_lab_content, height=200)
 
 if st.button("Generate PDF"):
     if outline_input and content_input:
